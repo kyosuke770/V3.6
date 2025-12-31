@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Instant English</title>
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 16px;
+      background: #f5f5f5;
+    }
+
+    h1 {
+      font-size: 18px;
+      margin: 0 0 12px;
+    }
+
+    /* 共通カード */
+    .panel {
+      background: #fff;
+      padding: 14px;
+      border-radius: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      margin-bottom: 12px;
+    }
+
+    /* 進捗バー */
+    .barWrap { background:#ddd; height:8px; border-radius:4px; }
+    .bar { height:8px; width:0%; border-radius:4px; }
+
+    /* ボタン */
+    .buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      flex: 1;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      background: #007aff;
+      color: white;
+    }
+    button.secondary { background:#555; }
+    button.ghost { background:#e9e9e9; color:#111; }
+
+    /* ブロック/シーン横スクロール */
+    .chips {
+      display:flex;
+      gap:8px;
+      overflow-x:auto;
+      padding-bottom: 2px;
+    }
+    .chips button {
+      flex: 0 0 auto;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #eee;
+      color:#111;
+    }
+
+    /* 学習カード */
+    #card {
+      background:#fff;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 12px;
+    }
+    #jp { font-size: 18px; margin-bottom: 12px; }
+    #en { font-size: 20px; font-weight: 700; color:#333; }
+
+    /* NOTE */
+    #noteBox {
+      background:#fff;
+      padding:14px;
+      border-radius:10px;
+      box-shadow:0 1px 4px rgba(0,0,0,0.08);
+      margin-bottom: 12px;
+      font-size:14px;
+      color:#555;
+    }
+
+    /* 表示切替 */
+    .hidden { display:none; }
+  </style>
+</head>
+<body>
+
+  <h1>Instant English</h1>
+
+  <!-- ===== HOME VIEW ===== -->
+  <div id="homeView">
+
+    <div class="panel">
+      <div id="progressText">進捗：0 / 0</div>
+      <div class="barWrap">
+        <div id="progressBar" class="bar" style="background:#007aff;"></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div id="dailyText">今日: 0 / 10</div>
+      <div class="barWrap">
+        <div id="dailyBar" class="bar" style="background:#34c759;"></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div style="font-weight:700;margin-bottom:8px;">今日のおすすめ</div>
+      <div class="buttons">
+        <button id="homeDue">復習（Due）</button>
+        <button id="homeVideo" class="secondary">動画順</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div style="font-weight:700;margin-bottom:8px;">ブロック</div>
+      <div id="blocks" class="chips"></div>
+    </div>
+
+    <div class="panel">
+      <div style="font-weight:700;margin-bottom:8px;">シーン</div>
+      <div id="scenes" class="chips"></div>
+    </div>
+
+  </div>
+
+  <!-- ===== STUDY VIEW ===== -->
+  <div id="studyView" class="hidden">
+
+    <div class="buttons">
+      <button id="backHome" class="ghost">← ホーム</button>
+      <button id="videoOrder" class="secondary">動画順</button>
+    </div>
+
+    <div id="card">
+      <div id="jp">読み込み中…</div>
+      <div id="en">タップして答え</div>
+    </div>
+
+    <div id="noteBox">
+      <div id="noteText"></div>
+    </div>
+
+    <div class="buttons">
+      <button id="again" class="secondary">AGAIN</button>
+      <button id="good">GOOD</button>
+    </div>
+
+    <div class="buttons">
+      <button id="next" class="secondary">次へ</button>
+      <button id="review" class="secondary">復習（Due）</button>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
